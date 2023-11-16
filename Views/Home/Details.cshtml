@@ -1,0 +1,69 @@
+﻿@model KMF.Models.ConcertoDto
+
+@{
+    var contextName = Model.Name;
+    ViewData["Title"] = contextName;
+    var day = Model.Time.DayOfWeek.ToString();
+
+    string finalDay;
+
+    if (day == "Monday")
+    {
+        finalDay = "Poniedziałek";
+    }
+    else if (day == "Tuesday")
+    {
+        finalDay = "Wtorek";
+    }
+    else if (day == "Wednesday")
+    {
+        finalDay = "Środa";
+    }
+    else if (day == "Thursday")
+    {
+        finalDay = "Czwartek";
+    }
+    else if (day == "Friday")
+    {
+        finalDay = "Piątek";
+    }
+    else if (day == "Saturday")
+    {
+        finalDay = "Sobota";
+    }
+    else
+    {
+        finalDay = "Niedziela";
+    }
+}
+
+<center>
+    <h1>@contextName</h1>
+    <br />
+    <h2>
+        <strong>Miejsce</strong>
+    </h2>
+    <h4>@Model.Place</h4>
+    <br />
+    <h2>
+        <strong>Data</strong>
+    </h2>
+    <h4>@finalDay, @Model.Time.ToString("dd/MM/yyyy HH:mm")</h4>
+    <br />
+    <h2>
+        <strong>Program</strong>
+    </h2>
+    <h4>@Model.ConcertProgram</h4>
+    <br />
+    <h2>
+        <strong>Wykonawcy</strong>
+    </h2>
+    <h4>@Model.Info</h4>
+    <hr />
+    <a asp-action="Concertos" class="btn btn-primary">Powrót to listy</a>
+    @if (Model.IsEditable)
+    {
+        <a asp-action="Edit" class="btn btn-outline-secondary" asp-route-encodedName="@Model.EncodedName">Edytuj</a>
+    }
+</center>
+

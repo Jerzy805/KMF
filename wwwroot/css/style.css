@@ -1,0 +1,16 @@
+﻿.container {
+    display: flex;
+    justify - content: space - between;
+    float: left;
+}
+
+.text {
+    margin-right: 100px;
+    float: left;
+    flex - grow: 1;
+}
+
+.image img
+{
+    max-width: 200%;
+}

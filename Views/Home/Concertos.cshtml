@@ -1,0 +1,53 @@
+﻿@model IEnumerable<KMF.Models.ConcertoDto>
+
+@{
+    ViewData["Title"] = "Koncerty";
+}
+
+@{
+    foreach (var element in Model)
+    {
+        if (element.IsEditable)
+        {
+            <p>
+                <a asp-action="Create" class="btn btn-secondary">Dodaj nowy koncert</a>
+            </p>
+            break;
+        }
+    }
+}
+
+<h1>Najbliższe koncerty</h1>
+
+<div class="row">
+    @foreach (var element in Model)
+    {
+        <div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+                @{
+                    if (element.Time < DateTime.Now)
+                    {
+                        <h5 class="card-title text-muted">@element.Name</h5>
+                    }
+                    else if (element.Time.Day == DateTime.Now.Day)
+                    {
+                        <h5 class="card-title">@element.Name (Dzisiaj)</h5>
+                    }
+                    else
+                    {
+                        <h5 class="card-title">@element.Name</h5>
+                    }
+                }
+                <h6 class="card-subititle mb-2 text-muted">@element.Time.ToString("dd/MM/yyyy HH:mm")</h6>
+                <p class="card-text">@element.Place</p>
+                <a class="btn btn-primary" asp-controller="Home" asp-action="Details" asp-route-encodedName="@element.EncodedName">Szczegóły</a>
+                @if (element.IsEditable)
+                {
+                    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Edit" asp-route-encodedName="@element.EncodedName">Edytuj</a>
+                    <hr />
+                    <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-encodedName="@element.EncodedName">Usuń</a>
+                }
+            </div>
+        </div>
+    }
+</div>

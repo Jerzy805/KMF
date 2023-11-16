@@ -1,0 +1,47 @@
+﻿@model KMF.Models.ConcertoDto;
+
+@{
+    ViewData["Title"] = "Dodawanie nowego koncertu";
+}
+
+<h1>Dodaj nowy koncert</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form action="/Home/Create" method="post">
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="Name">Nazwa</label>
+                <input class="form-control" type="text" asp-for="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Time" class="control-label"></label>
+                <input asp-for="Time" class="form-control" />
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="Place">Miejsce</label>
+                <input class="form-control" type="text" asp-for="Place" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="ConcertProgram">Program</label>
+                <input class="form-control" type="text" asp-for="ConcertProgram" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="Info">Wykonawcy</label>
+                <input class="form-control" type="text" asp-for="Info" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
